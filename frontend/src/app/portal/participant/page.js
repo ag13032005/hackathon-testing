@@ -127,6 +127,24 @@ export default function ParticipantDashboard() {
     saveTeamState(newTeam);
   };
 
+  const handleRegisterSolo = (e) => {
+    e.preventDefault();
+    const track = e.target.track.value;
+
+    const newSoloTeam = {
+      name: `${currentUser.fullName} (Solo)`,
+      track: track,
+      code: 'EWIT-SOLO',
+      leader: currentUser.fullName,
+      members: [currentUser.fullName],
+      isLocked: true,
+      isPaid: false
+    };
+
+    saveTeamState(newSoloTeam);
+    toast.success('Solo Entry Registered', 'Hacking track selected successfully! Please proceed to payment.');
+  };
+
   const handleJoinTeam = (e) => {
     e.preventDefault();
     if (!joinCode) return;
@@ -369,27 +387,14 @@ export default function ParticipantDashboard() {
 
       {/* ─── Team Selection / Setup ─── */}
       {!team ? (
-        <div className={styles.setupGrid}>
-          {/* Create Team Card */}
-          <div className={styles.card}>
-            <h2 className={styles.cardTitle}>Form a New Team</h2>
-            <p className={styles.cardSubtitle}>You will become the Team Leader and pay the ₹1000 registration fee.</p>
+        currentUser.participationMode === 'solo' ? (
+          <div className={styles.card} style={{ maxWidth: '640px', margin: '0 auto', width: '100%' }}>
+            <h2 className={styles.cardTitle}>Solo Hacking Track Selection</h2>
+            <p className={styles.cardSubtitle}>Confirm your innovation track to activate your individual registration pass.</p>
             
-            <form onSubmit={handleCreateTeam} className={styles.form}>
+            <form onSubmit={handleRegisterSolo} className={styles.form}>
               <div className="form-group">
-                <label className="form-label" htmlFor="teamName">Team Name</label>
-                <input
-                  type="text"
-                  id="teamName"
-                  name="teamName"
-                  placeholder="EarthSavers"
-                  className="form-input"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label" htmlFor="track">Select Track</label>
+                <label className="form-label" htmlFor="track">Select Innovation Track</label>
                 <select id="track" name="track" className="form-input">
                   <option value="AI & Automation">AI & Automation</option>
                   <option value="HealthTech & Wellness">HealthTech & Wellness</option>
@@ -399,41 +404,77 @@ export default function ParticipantDashboard() {
                 </select>
               </div>
 
-              <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                Create Team
+              <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '12px' }}>
+                Confirm Solo Hacking Track
               </button>
             </form>
           </div>
+        ) : (
+          <div className={styles.setupGrid}>
+            {/* Create Team Card */}
+            <div className={styles.card}>
+              <h2 className={styles.cardTitle}>Form a New Team</h2>
+              <p className={styles.cardSubtitle}>You will become the Team Leader and pay the ₹1000 registration fee.</p>
+              
+              <form onSubmit={handleCreateTeam} className={styles.form}>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="teamName">Team Name</label>
+                  <input
+                    type="text"
+                    id="teamName"
+                    name="teamName"
+                    placeholder="EarthSavers"
+                    className="form-input"
+                    required
+                  />
+                </div>
 
-          {/* Join Team Card */}
-          <div className={styles.card}>
-            <h2 className={styles.cardTitle}>Join an Existing Team</h2>
-            <p className={styles.cardSubtitle}>Ask your Team Leader for the generated group code.</p>
-            
-            <form onSubmit={handleJoinTeam} className={styles.form}>
-              <div className="form-group">
-                <label className="form-label" htmlFor="joinCode">Enter Group Code</label>
-                <input
-                  type="text"
-                  id="joinCode"
-                  placeholder="EWIT-XXXXXX"
-                  value={joinCode}
-                  onChange={(e) => setJoinCode(e.target.value)}
-                  className="form-input"
-                  required
-                />
-              </div>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="track">Select Track</label>
+                  <select id="track" name="track" className="form-input">
+                    <option value="AI & Automation">AI & Automation</option>
+                    <option value="HealthTech & Wellness">HealthTech & Wellness</option>
+                    <option value="Sustainability & Green Tech">Sustainability & Green Tech</option>
+                    <option value="Smart Cities & IoT">Smart Cities & IoT</option>
+                    <option value="Open Innovation">Open Innovation</option>
+                  </select>
+                </div>
 
-              <button type="submit" className="btn btn-secondary" style={{ width: '100%' }}>
-                Join Team
-              </button>
-            </form>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+                  Create Team
+                </button>
+              </form>
+            </div>
+
+            {/* Join Team Card */}
+            <div className={styles.card}>
+              <h2 className={styles.cardTitle}>Join an Existing Team</h2>
+              <p className={styles.cardSubtitle}>Ask your Team Leader for the generated group code.</p>
+              
+              <form onSubmit={handleJoinTeam} className={styles.form}>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="joinCode">Enter Group Code</label>
+                  <input
+                    type="text"
+                    id="joinCode"
+                    placeholder="EWIT-XXXXXX"
+                    value={joinCode}
+                    onChange={(e) => setJoinCode(e.target.value)}
+                    className="form-input"
+                    required
+                  />
+                </div>
+
+                <button type="submit" className="btn btn-secondary" style={{ width: '100%' }}>
+                  Join Team
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
+        )
       ) : (
         /* ─── Active Team Status Workspace ─── */
         <div className={styles.setupGrid}>
-          
           {/* Members & Details Workspace */}
           <div className={styles.card}>
             <div className={styles.teamHeader}>
@@ -442,31 +483,44 @@ export default function ParticipantDashboard() {
                 <span className={styles.trackLabel}>{team.track}</span>
               </div>
               <button onClick={handleLeaveTeam} className="btn btn-ghost btn-sm" style={{ color: 'var(--danger)' }}>
-                Leave Team
+                {team.code === 'EWIT-SOLO' ? 'Change Track' : 'Leave Team'}
               </button>
             </div>
             
-            <div className={styles.groupCodeBox}>
-              <span className={styles.codeLabel}>Team Group Code:</span>
-              <span className={styles.codeText}>{team.code}</span>
-            </div>
+            {team.code !== 'EWIT-SOLO' ? (
+              <div className={styles.groupCodeBox}>
+                <span className={styles.codeLabel}>Team Group Code:</span>
+                <span className={styles.codeText}>{team.code}</span>
+              </div>
+            ) : (
+              <div className={styles.groupCodeBox}>
+                <span className={styles.codeLabel}>Hacking Mode:</span>
+                <span className={styles.codeText}>Solo Hacking Entry</span>
+              </div>
+            )}
 
             <div className={styles.memberListSection}>
-              <h3 className={styles.memberListTitle}>Team Members (Size: {team.members.length}/4)</h3>
+              <h3 className={styles.memberListTitle}>
+                {team.code === 'EWIT-SOLO' ? 'Registered Participant' : `Team Members (Size: ${team.members.length}/4)`}
+              </h3>
               <div className={styles.members}>
                 {team.members.map((member, i) => (
                   <div key={i} className={styles.memberItem}>
                     <span className={styles.memberDot}>●</span>
                     <span className={styles.memberName}>
-                      {member} {i === 0 ? <strong className={styles.leaderTag}>(Leader)</strong> : ''}
+                      {member} {i === 0 && team.code !== 'EWIT-SOLO' ? <strong className={styles.leaderTag}>(Leader)</strong> : ''}
                     </span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Lock Action (For Leader Only) */}
-            {!team.isLocked ? (
+            {/* Lock Action (For Leader Only / Auto-locked for Solo) */}
+            {team.code === 'EWIT-SOLO' ? (
+              <div className={styles.lockedBadge} style={{ background: 'rgba(16, 185, 129, 0.08)', color: 'var(--success)', borderColor: 'rgba(16, 185, 129, 0.2)', marginTop: '20px' }}>
+                ✓ Solo Hacking Track Confirmed
+              </div>
+            ) : !team.isLocked ? (
               <div className={styles.lockSection}>
                 <p className={styles.lockWarning}>
                   ⚠️ <strong>Important</strong>: You must lock the team to confirm membership. After locking, members cannot be changed. Only the HOD or Tech Head can unlock.

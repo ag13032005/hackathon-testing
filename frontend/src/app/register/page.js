@@ -17,7 +17,8 @@ export default function RegisterPage() {
     semester: '1',
     password: '',
     confirmPassword: '',
-    agreeTerms: false
+    agreeTerms: false,
+    participationMode: 'teamed'
   });
 
   const [error, setError] = useState('');
@@ -71,6 +72,7 @@ export default function RegisterPage() {
         semester: formData.semester,
         password: formData.password,
         role: 'PARTICIPANT',
+        participationMode: formData.participationMode,
         createdAt: new Date().toISOString()
       };
 
@@ -258,6 +260,22 @@ export default function RegisterPage() {
                   <option value="6">6th Semester</option>
                   <option value="7">7th Semester</option>
                   <option value="8">8th Semester</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label" htmlFor="participationMode">Participation Mode</label>
+                <select
+                  id="participationMode"
+                  name="participationMode"
+                  value={formData.participationMode}
+                  onChange={handleChange}
+                  className="form-input"
+                  required
+                  disabled={loading || success}
+                >
+                  <option value="teamed">Teamed (Form/Join a Team)</option>
+                  <option value="solo">Solo (Hack Individually)</option>
                 </select>
               </div>
 
