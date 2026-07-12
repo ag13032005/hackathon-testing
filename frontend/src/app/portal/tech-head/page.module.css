@@ -1,0 +1,300 @@
+/* ============================================
+   TECH HEAD DASHBOARD PAGE STYLES
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ─── Heading ─── */
+.headingRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.systemMetric {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+  padding: 12px 20px;
+  gap: 16px;
+  align-items: center;
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.metricLabel {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.metricValOk {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.metricDivider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-default);
+}
+
+@media (max-width: 768px) {
+  .headingRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* ─── Analytics Grid ─── */
+.analyticsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.statCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all var(--transition-fast);
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-400);
+  box-shadow: var(--shadow-md);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-md);
+  background: var(--bg-section-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.statNum {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ─── Layout & Controls ─── */
+.controlGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .controlGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cardSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.configColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Event Mode List */
+.modeList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.modeButton {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 16px;
+  background: var(--bg-body);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  gap: 12px;
+  width: 100%;
+}
+
+.modeButton:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--primary-500);
+}
+
+.modeActive {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: var(--primary-500);
+}
+
+.modeActive .modeCheck {
+  color: var(--primary-500);
+}
+
+.modeActive .modeName {
+  color: var(--primary-700);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .modeActive .modeName {
+  color: var(--primary-300);
+}
+
+.modeCheck {
+  font-size: 1rem;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.modeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.modeName {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.modeDesc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Admin Actions & Statuses */
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.statusToast {
+  margin-top: 16px;
+  padding: 12px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--success);
+  border-radius: var(--border-radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Audit Logs */
+.logList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.emptyLogs {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  padding: 32px 0;
+}
+
+.logItem {
+  padding: 10px 14px;
+  background: var(--bg-body);
+  border-left: 3px solid var(--primary-500);
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  font-size: 0.8rem;
+}
+
+.logMeta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.logTime {
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.logTag {
+  font-weight: 600;
+  color: var(--primary-600);
+}
+
+[data-theme='dark'] .logTag {
+  color: var(--primary-300);
+}
+
+.logDetails {
+  color: var(--text-secondary);
+}

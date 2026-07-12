@@ -1,0 +1,128 @@
+/* ============================================
+   TECH HEAD ANNOUNCEMENTS PAGE STYLES
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.annGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .annGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cardSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Announcements List */
+.noticeList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.emptyNotices {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: 40px 0;
+  font-size: 0.9rem;
+}
+
+.noticeItem {
+  padding: 16px;
+  background: var(--bg-body);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.noticeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.noticeHeader strong {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.targetBadge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  background: rgba(27, 77, 62, 0.08);
+  color: var(--primary-700);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .targetBadge {
+  background: rgba(52, 211, 153, 0.1);
+  color: var(--primary-300);
+}
+
+.noticeContent {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.noticeFooter {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  align-items: center;
+  border-top: 1px dashed var(--border-default);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+.deleteLink {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.deleteLink:hover {
+  text-decoration: underline;
+}

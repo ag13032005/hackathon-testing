@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: ewit_postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: ewit_admin
+      POSTGRES_PASSWORD: ewit_secure_postgres_password_9852
+      POSTGRES_DB: ewit_hackathon
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ewit_fastapi_backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://ewit_admin:ewit_secure_postgres_password_9852@db:5432/ewit_hackathon
+      - SECRET_KEY=ewit_super_secret_session_cryptographic_key_9852014763
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ewit_nextjs_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

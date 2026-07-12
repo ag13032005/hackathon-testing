@@ -1,0 +1,99 @@
+/* ============================================
+   COORDINATOR SCAN PAGE STYLES
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cardSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.scanControls {
+  margin-bottom: 24px;
+}
+
+.readerWrapper {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #090d16;
+  padding: 12px;
+}
+
+.scannerInterface {
+  background: var(--bg-body);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+/* Result box */
+.resultBox {
+  padding: 20px;
+  background: var(--bg-body);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resultHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resultName {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.resultUsn {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.resultTeam {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.statusRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  border-top: 1px dashed var(--border-default);
+  padding-top: 8px;
+  font-size: 0.85rem;
+}
+
+.paidText {
+  color: var(--success);
+}
+
+.unpaidText {
+  color: var(--danger);
+}

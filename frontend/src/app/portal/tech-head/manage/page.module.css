@@ -1,0 +1,159 @@
+/* ============================================
+   TECH HEAD MANAGE PAGE STYLES
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Tabs Grid */
+.tabsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.tabButton {
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  border-radius: var(--border-radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.tabButton:hover {
+  background: var(--bg-section-alt);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.tabActive {
+  background: var(--primary-600);
+  color: white !important;
+  border-color: var(--primary-700);
+}
+
+/* Workspace Card */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+}
+
+.workspaceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cardSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Add Form Drawer */
+.addForm {
+  background: var(--bg-body);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Search bar */
+.searchBarRow {
+  margin-bottom: 20px;
+}
+
+/* Table formats */
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-default);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.table th {
+  background: var(--bg-section-alt);
+  color: var(--text-primary);
+  font-weight: 600;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--border-default);
+}
+
+.table td {
+  padding: 12px 16px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-default);
+  white-space: nowrap;
+}
+
+.table tbody tr:hover {
+  background: rgba(27, 77, 62, 0.03);
+}
+
+.emptyTable {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: 32px 0 !important;
+}
+
+.roleBadge {
+  padding: 2px 8px;
+  background: rgba(27, 77, 62, 0.08);
+  color: var(--primary-700);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .roleBadge {
+  background: rgba(52, 211, 153, 0.1);
+  color: var(--primary-300);
+}
+
+.activeBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.deleteButton:hover {
+  text-decoration: underline;
+}

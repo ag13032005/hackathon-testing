@@ -1,0 +1,269 @@
+/* ============================================
+   COORDINATOR DASHBOARD PAGE STYLES
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cardSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.configColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Scanner Simulation */
+.scannerSimulator {
+  margin-bottom: 24px;
+  background: var(--bg-body);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+  padding: 16px;
+}
+
+/* Profile Card scanned result */
+.profileCard {
+  background: var(--bg-body);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-default);
+  padding-bottom: 12px;
+}
+
+.profileName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.profileTeam {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.paidBadge {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.unpaidBadge {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.verificationActions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.actionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.actionBlock strong {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.checkedInLabel {
+  font-size: 0.9rem;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.actionDenied {
+  font-size: 0.85rem;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.couponBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px dashed var(--border-default);
+  padding-top: 16px;
+}
+
+.couponBlock strong {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.couponGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.couponRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+}
+
+.couponName {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.redeemedLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.couponLocked {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Empty scan state */
+.emptyScanState {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Support Form Category */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Tickets Section */
+.ticketsSection {
+  margin-top: 24px;
+  border-top: 1px solid var(--border-default);
+  padding-top: 20px;
+}
+
+.ticketsSectionTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.ticketsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.ticketItem {
+  padding: 12px;
+  background: var(--bg-body);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+}
+
+.ticketMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.ticketCategoryBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-700);
+}
+
+[data-theme='dark'] .ticketCategoryBadge {
+  color: var(--primary-300);
+}
+
+.ticketOpenBadge {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+}
+
+.ticketClosedBadge {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+}
+
+.ticketDesc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}

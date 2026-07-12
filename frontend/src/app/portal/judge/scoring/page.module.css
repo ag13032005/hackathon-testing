@@ -1,0 +1,108 @@
+/* ============================================
+   JUDGE SCORING BOARD PAGE STYLES
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cardSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scoreRows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scoreRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-body);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+  gap: 16px;
+}
+
+.scoreLabel {
+  display: flex;
+  flex-direction: column;
+}
+
+.scoreLabel strong {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.scoreLabel span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.scoreInput {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.scoreInput:focus {
+  outline: none;
+  border-color: var(--primary-500);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: var(--bg-section-alt);
+  border-radius: var(--border-radius-md);
+}
+
+.totalRow span {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.totalRow strong {
+  font-size: 1.25rem;
+  color: var(--accent-600);
+  font-family: var(--font-display);
+}
+
+[data-theme='dark'] .totalRow strong {
+  color: var(--accent-400);
+}

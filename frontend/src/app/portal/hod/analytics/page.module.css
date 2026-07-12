@@ -1,0 +1,106 @@
+/* ============================================
+   HOD ANALYTICS PAGE STYLES
+   ============================================ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cardSubtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+/* Departmental Table */
+.tableWrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-default);
+  border-radius: var(--border-radius-md);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.table th {
+  background: var(--bg-section-alt);
+  color: var(--text-primary);
+  padding: 12px 16px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-default);
+}
+
+.table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-default);
+  color: var(--text-secondary);
+}
+
+/* Track progress bars */
+.tracksStatsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trackStatItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trackMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+.trackMeta strong {
+  color: var(--text-primary);
+}
+
+.trackMeta span {
+  color: var(--text-muted);
+}
+
+.progressBarBg {
+  height: 8px;
+  background: var(--bg-section-alt);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  border-radius: var(--border-radius-full);
+}
