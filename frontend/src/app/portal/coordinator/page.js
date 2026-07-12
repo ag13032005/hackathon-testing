@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function CoordinatorDashboard() {
+  const toast = useToast();
   // Mock participant database for scanning simulation
   const MOCK_PARTICIPANTS = [
     {
@@ -55,7 +57,7 @@ export default function CoordinatorDashboard() {
     if (!scannedUser) return;
     const updated = { ...scannedUser, checkedIn: true };
     setScannedUser(updated);
-    alert(`${scannedUser.name} checked in successfully!`);
+    toast.success('Check-In Confirmed', `${scannedUser.name} has been checked in.`);
   };
 
   const handleRedeemCoupon = (couponKey) => {
@@ -63,7 +65,7 @@ export default function CoordinatorDashboard() {
     const updatedCoupons = { ...scannedUser.coupons, [couponKey]: 'REDEEMED' };
     const updated = { ...scannedUser, coupons: updatedCoupons };
     setScannedUser(updated);
-    alert(`${couponKey.toUpperCase()} coupon redeemed successfully!`);
+    toast.success('Coupon Redeemed', `${couponKey.toUpperCase()} coupon marked as used.`);
   };
 
   const handleRaiseTicket = (e) => {
@@ -79,7 +81,7 @@ export default function CoordinatorDashboard() {
 
     setTickets(prev => [newTicket, ...prev]);
     setSupportDesc('');
-    alert('Support ticket raised. Tech Head admin has been notified.');
+    toast.info('Ticket Raised', 'Support ticket filed. Tech Head admin has been notified.');
   };
 
   return (

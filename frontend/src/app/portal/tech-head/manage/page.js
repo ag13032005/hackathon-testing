@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function ManageModulePage() {
+  const toast = useToast();
   const [activeTab, setActiveTab] = useState('Users');
   const [searchQuery, setSearchQuery] = useState('');
   
@@ -130,7 +132,7 @@ export default function ManageModulePage() {
 
     setFormData({ field1: '', field2: '', field3: '' });
     setShowAddForm(false);
-    alert(`Successfully added new item to ${activeTab}!`);
+    toast.success('Item Added', `Successfully added new item to ${activeTab}!`);
   };
 
   const handleDeleteItem = (itemId) => {

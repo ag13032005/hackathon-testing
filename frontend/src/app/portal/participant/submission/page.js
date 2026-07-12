@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function ParticipantSubmissionPage() {
+  const toast = useToast();
   const [projectTitle, setProjectTitle] = useState('');
   const [projectDesc, setProjectDesc] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
@@ -14,7 +16,7 @@ export default function ParticipantSubmissionPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLocked(true);
-    alert('Project details locked and submitted to judges successfully!');
+    toast.success('Project Submitted', 'Project details locked and submitted to judges successfully!');
   };
 
   return (

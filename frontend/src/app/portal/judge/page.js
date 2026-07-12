@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function JudgeDashboard() {
+  const toast = useToast();
   const [selectedTeam, setSelectedTeam] = useState(null);
   
   const [teams, setTeams] = useState([
@@ -86,7 +88,7 @@ export default function JudgeDashboard() {
     }));
 
     setSelectedTeam(prev => ({ ...prev, scored: true }));
-    alert(`Evaluation submitted for ${selectedTeam.name}. Average Score: ${calculateTotal()}/10`);
+    toast.success('Evaluation Submitted', `${selectedTeam.name} scored ${calculateTotal()}/10`);
   };
 
   return (

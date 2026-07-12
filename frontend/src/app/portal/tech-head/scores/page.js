@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 const DEFAULT_TEAMS = [
   {
@@ -43,6 +44,7 @@ const DEFAULT_TEAMS = [
 ];
 
 export default function TechHeadScoreOverridesPage() {
+  const toast = useToast();
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [editScores, setEditScores] = useState({
@@ -108,7 +110,7 @@ export default function TechHeadScoreOverridesPage() {
     });
     localStorage.setItem('ewit_audit_logs', JSON.stringify(existingLogs));
 
-    alert(`Marks updated successfully for ${selectedTeam.name}! New average: ${calculateAverage(editScores)}/10 (Judges lock bypassed)`);
+    toast.success('Score Override Applied', `${selectedTeam.name} updated to ${calculateAverage(editScores)}/10`);
     setSelectedTeam(null);
   };
 

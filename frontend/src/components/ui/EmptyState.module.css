@@ -1,0 +1,44 @@
+/* ============================================
+   EMPTY STATE - Zero-data Placeholder
+   ============================================ */
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 48px 24px;
+  min-height: 200px;
+}
+
+.iconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-default, rgba(255,255,255,0.06));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #f1f5f3);
+  margin-bottom: 6px;
+}
+
+.description {
+  font-size: 0.85rem;
+  color: var(--text-tertiary, #6b7f73);
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+.action {
+  margin-top: 16px;
+}

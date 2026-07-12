@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function CoordinatorScanPage() {
+  const toast = useToast();
   const [selectedUser, setSelectedUser] = useState('');
   const [scannedResult, setScannedResult] = useState(null);
   const [isCameraActive, setIsCameraActive] = useState(false);
@@ -63,7 +65,7 @@ export default function CoordinatorScanPage() {
           // Stop camera after successful scan
           scanner.clear().catch(err => console.error(err));
           setIsCameraActive(false);
-          alert('QR Pass scanned successfully!');
+          toast.success('QR Scanned', 'QR Pass scanned successfully!');
         },
         (error) => {
           // Silent callback for qr frame scanning failures
@@ -85,7 +87,7 @@ export default function CoordinatorScanPage() {
     if (!selectedUser) return;
     const match = PARTICIPANTS.find(p => p.id === selectedUser);
     setScannedResult(match);
-    alert('Simulated QR Pass scanned successfully!');
+    toast.success('Simulation Complete', 'Simulated QR Pass scanned successfully!');
   };
 
   return (

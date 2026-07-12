@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function EventModeSettingsPage() {
+  const toast = useToast();
   const [eventMode, setEventMode] = useState('REGISTRATION_OPEN');
   const [mockPayment, setMockPayment] = useState(true);
   const [teamSizeMin, setTeamSizeMin] = useState(2);
@@ -29,7 +31,7 @@ export default function EventModeSettingsPage() {
       setIsSaved(false);
     }, 2000);
 
-    alert('System settings updated successfully!');
+    toast.success('Settings Saved', 'System settings updated successfully!');
   };
 
   const EVENT_MODES = [

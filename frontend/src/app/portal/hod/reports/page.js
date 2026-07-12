@@ -2,15 +2,17 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function HodReportsPage() {
+  const toast = useToast();
   const [loading, setLoading] = useState(false);
 
   const triggerDownload = (reportName) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      alert(`Report compilation completed! Downloaded file: ${reportName}`);
+      toast.success('Report Exported', `Report compilation completed! Downloaded file: ${reportName}`);
     }, 1500);
   };
 

@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function CoordinatorCheckInPage() {
+  const toast = useToast();
   const [participants, setParticipants] = useState([
     { id: 1, name: 'Ananya Sharma', usn: '1EW22CS014', team: 'EcoSavers', paid: true, checkedIn: false },
     { id: 2, name: 'Rohit Kumar', usn: '1EW22IS089', team: 'EcoSavers', paid: true, checkedIn: true },
@@ -17,7 +19,7 @@ export default function CoordinatorCheckInPage() {
       }
       return p;
     }));
-    alert('Participant entry checked in successfully!');
+    toast.success('Check-In Confirmed', 'Participant entry checked in successfully!');
   };
 
   return (

@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function AnnouncementsPage() {
+  const toast = useToast();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [target, setTarget] = useState('ALL');
@@ -27,7 +29,7 @@ export default function AnnouncementsPage() {
     setAnnouncements(prev => [newAnn, ...prev]);
     setTitle('');
     setContent('');
-    alert('Announcement published successfully to all portals!');
+    toast.success('Announcement Published', 'Announcement published successfully to all portals!');
   };
 
   const handleDelete = (id) => {

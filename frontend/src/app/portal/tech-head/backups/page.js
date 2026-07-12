@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function BackupsPage() {
+  const toast = useToast();
   const [backups, setBackups] = useState([
     { id: 1, filename: 'ewit_hackathon_backup_2026_07_12.sql', size: '1.24 GB', date: 'Jul 12, 2026 11:30 PM', type: 'Auto Snapshot', status: 'Success' },
     { id: 2, filename: 'ewit_hackathon_backup_2026_07_11.sql', size: '1.21 GB', date: 'Jul 11, 2026 11:30 PM', type: 'Auto Snapshot', status: 'Success' },
@@ -28,7 +30,7 @@ export default function BackupsPage() {
 
       setBackups(prev => [newBackup, ...prev]);
       setLoading(false);
-      alert('PostgreSQL database backup snapshot created successfully!');
+      toast.success('Backup Created', 'PostgreSQL database backup snapshot created successfully!');
     }, 2000);
   };
 
@@ -37,7 +39,7 @@ export default function BackupsPage() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        alert('Database tables restored successfully from backup ' + filename);
+        toast.success('Restore Complete', 'Database tables restored successfully from backup ' + filename);
       }, 3000);
     }
   };
@@ -72,7 +74,7 @@ export default function BackupsPage() {
                 setTimeout(() => {
                   setLoading(false);
                   setDbStatus('DATABASE: ONLINE (100% health, 0 locks, 0 corruptions)');
-                  alert('Database integrity check completed. All tables healthy.');
+                  toast.success('Integrity Checked', 'Database integrity check completed. All tables healthy.');
                 }, 1500);
               }}
               className="btn btn-secondary"
@@ -108,7 +110,7 @@ export default function BackupsPage() {
                   <span className={styles.successLabel}>{b.status}</span>
                 </div>
                 <div className={styles.backupActions}>
-                  <button onClick={() => alert('Download initiated for ' + b.filename)} className="btn btn-secondary btn-sm" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>
+                  <button onClick={() => toast.info('Download Initiated', 'Download initiated for ' + b.filename)} className="btn btn-secondary btn-sm" style={{ padding: '4px 10px', fontSize: '0.75rem' }}>
                     📥 Download SQL
                   </button>
                   <button onClick={() => handleRestore(b.filename)} className="btn btn-ghost btn-sm" style={{ color: 'var(--danger)', padding: '4px 10px', fontSize: '0.75rem' }}>

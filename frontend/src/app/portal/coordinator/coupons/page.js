@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function CoordinatorCouponsPage() {
+  const toast = useToast();
   const [selectedUser, setSelectedUser] = useState('1');
   const [users, setUsers] = useState([
     { id: '1', name: 'Ananya Sharma', usn: '1EW22CS014', coupons: { breakfast: 'UNUSED', lunch: 'UNUSED', dinner: 'UNUSED' } },
@@ -28,7 +30,7 @@ export default function CoordinatorCouponsPage() {
       return u;
     }));
 
-    alert(`${couponKey.toUpperCase()} coupon redeemed successfully!`);
+    toast.success('Coupon Redeemed', `${couponKey.toUpperCase()} coupon redeemed successfully!`);
   };
 
   return (

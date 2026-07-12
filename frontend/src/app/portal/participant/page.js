@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import Alert from '@/components/ui/Alert';
 
 export default function ParticipantDashboard() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -124,13 +125,11 @@ export default function ParticipantDashboard() {
     <div className={styles.container}>
       {/* ─── Profile Status Alert ─── */}
       {!hasProfile && (
-        <div className={styles.warningCard}>
-          <div className={styles.warningIcon}>⚠️</div>
-          <div className={styles.warningText}>
-            <strong>Academic Profile Incomplete</strong>
-            <p>Please enter your USN and department details in registration or contact the HOD desk to link your profile.</p>
-          </div>
-        </div>
+        <Alert
+          variant="warning"
+          title="Academic Profile Incomplete"
+          description="Please enter your USN and department details in registration or contact the HOD desk to link your profile."
+        />
       )}
 
       {/* ─── Hacking Pass & QR System (Post-Payment Only) ─── */}

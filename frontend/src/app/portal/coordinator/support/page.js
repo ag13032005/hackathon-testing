@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function CoordinatorSupportPage() {
+  const toast = useToast();
   const [category, setCategory] = useState('Wi-Fi');
   const [desc, setDesc] = useState('');
   const [tickets, setTickets] = useState([
@@ -24,7 +26,7 @@ export default function CoordinatorSupportPage() {
 
     setTickets(prev => [newTicket, ...prev]);
     setDesc('');
-    alert('Support ticket raised. Admins notified.');
+    toast.info('Ticket Raised', 'Support ticket raised. Admins notified.');
   };
 
   return (

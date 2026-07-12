@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function HodAnnouncementsPage() {
+  const toast = useToast();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [target, setTarget] = useState('ALL');
@@ -27,7 +29,7 @@ export default function HodAnnouncementsPage() {
     setAnnouncements(prev => [newAnn, ...prev]);
     setTitle('');
     setContent('');
-    alert('Department notice broadcasted successfully!');
+    toast.success('Notice Published', 'Department notice broadcasted successfully!');
   };
 
   const handleDelete = (id) => {

@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function HodSchedulePage() {
+  const toast = useToast();
   const [schedule, setSchedule] = useState([
     { id: 1, event: 'Team Registrations Desk Open', time: 'Sep 1, 08:00 AM', location: 'EWIT Lobby Entrance' },
     { id: 2, event: 'Inauguration Ceremony', time: 'Sep 1, 09:30 AM', location: 'Main Seminar Hall' },
@@ -30,7 +32,7 @@ export default function HodSchedulePage() {
     setNewEvent('');
     setNewTime('');
     setNewLoc('');
-    alert('Timeline schedule slot updated!');
+    toast.success('Schedule Updated', 'Timeline schedule slot updated!');
   };
 
   const handleDeleteSchedule = (id) => {

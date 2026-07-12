@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 export default function ParticipantTeamPage() {
+  const toast = useToast();
   const [currentUser, setCurrentUser] = useState(null);
   const [team, setTeam] = useState(null);
   const [teamName, setTeamName] = useState('');
@@ -85,7 +87,7 @@ export default function ParticipantTeamPage() {
     if (!team) return;
     const updatedTeam = { ...team, isLocked: true };
     saveTeamState(updatedTeam);
-    alert('Team composition locked! No further edits can be made unless unlocked by HOD.');
+    toast.success('Team Locked', 'Team composition locked! No further edits can be made unless unlocked by HOD.');
   };
 
   return (

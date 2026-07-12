@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import StatCard from '@/components/ui/StatCard';
 
 export default function TechHeadDashboard() {
   // Mock live data that administrators need to monitor
@@ -69,6 +70,17 @@ export default function TechHeadDashboard() {
     }, 2000);
   };
 
+  const STAT_CARDS = [
+    { icon: '👥', value: analytics.registeredParticipants, label: 'Registered Users' },
+    { icon: '✓', value: analytics.approvedParticipants, label: 'Approved (Paid)', accentColor: 'success' },
+    { icon: '⏳', value: analytics.pendingRegistrations, label: 'Pending Verification', accentColor: 'warning' },
+    { icon: '🛡️', value: analytics.teamsFormed, label: 'Teams Formed' },
+    { icon: '🔒', value: analytics.teamsLocked, label: 'Locked Teams' },
+    { icon: '🎫', value: analytics.checkedIn, label: 'Checked In' },
+    { icon: '🖨️', value: analytics.qrScans, label: 'Total QR Scans' },
+    { icon: '⚖️', value: `${analytics.judgingProgress}%`, label: 'Judging Done' },
+  ];
+
   return (
     <div className={styles.container}>
       {/* ─── Page Heading ─── */}
@@ -92,69 +104,15 @@ export default function TechHeadDashboard() {
 
       {/* ─── Analytics Grid ─── */}
       <div className={styles.analyticsGrid}>
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>👥</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{analytics.registeredParticipants}</span>
-            <span className={styles.statLabel}>Registered Users</span>
-          </div>
-        </div>
-
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>✓</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{analytics.approvedParticipants}</span>
-            <span className={styles.statLabel}>Approved (Paid)</span>
-          </div>
-        </div>
-
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>⏳</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{analytics.pendingRegistrations}</span>
-            <span className={styles.statLabel}>Pending Verification</span>
-          </div>
-        </div>
-
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>🛡️</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{analytics.teamsFormed}</span>
-            <span className={styles.statLabel}>Teams Formed</span>
-          </div>
-        </div>
-
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>🔒</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{analytics.teamsLocked}</span>
-            <span className={styles.statLabel}>Locked Teams</span>
-          </div>
-        </div>
-
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>🎫</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{analytics.checkedIn}</span>
-            <span className={styles.statLabel}>Checked In</span>
-          </div>
-        </div>
-
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>🖨️</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{analytics.qrScans}</span>
-            <span className={styles.statLabel}>Total QR Scans</span>
-          </div>
-        </div>
-
-        <div className={styles.statCard}>
-          <div className={styles.statIcon}>⚖️</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{analytics.judgingProgress}%</span>
-            <span className={styles.statLabel}>Judging Done</span>
-          </div>
-        </div>
+        {STAT_CARDS.map((card, i) => (
+          <StatCard
+            key={i}
+            icon={card.icon}
+            value={card.value}
+            label={card.label}
+            accentColor={card.accentColor || 'default'}
+          />
+        ))}
       </div>
 
       {/* ─── Control Center & Actions ─── */}

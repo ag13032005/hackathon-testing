@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
+import StatCard from '@/components/ui/StatCard';
 
 export default function HodDashboard() {
+  const toast = useToast();
   const [announcements, setAnnouncements] = useState([
     { id: 1, title: 'Round 1 Submission Guidelines', date: 'Jul 12, 2026', author: 'HOD CSE' },
     { id: 2, title: 'Wi-Fi Credentials for EWIT Hacking Arenas', date: 'Jul 11, 2026', author: 'Tech Team' }
@@ -40,14 +43,14 @@ export default function HodDashboard() {
       }
       return t;
     }));
-    alert('Team unlocked. The Team Leader can now modify members.');
+    toast.success('Team Unlocked', 'The Team Leader can now modify members.');
   };
 
   const handleExportReport = () => {
     setReportGenerated(true);
     setTimeout(() => {
       setReportGenerated(false);
-      alert('Report exported successfully! (ewit_academic_analytics_2026.csv)');
+      toast.success('Report Exported', 'ewit_academic_analytics_2026.csv downloaded successfully.');
     }, 1500);
   };
 
@@ -55,21 +58,9 @@ export default function HodDashboard() {
     <div className={styles.container}>
       {/* ─── Academic Statistics Row ─── */}
       <div className={styles.statsRow}>
-        <div className={styles.card}>
-          <span className={styles.statLabel}>Academic Registrations</span>
-          <span className={styles.statValue}>152</span>
-          <span className={styles.statTrend}>+12 this week</span>
-        </div>
-        <div className={styles.card}>
-          <span className={styles.statLabel}>CSE Dept Teams</span>
-          <span className={styles.statValue}>48</span>
-          <span className={styles.statTrend}>38 Locked</span>
-        </div>
-        <div className={styles.card}>
-          <span className={styles.statLabel}>Active Tracks</span>
-          <span className={styles.statValue}>5</span>
-          <span className={styles.statTrend}>All active</span>
-        </div>
+        <StatCard icon="🎓" value={152} label="Academic Registrations" trend="+12 this week" />
+        <StatCard icon="🛡️" value={48} label="CSE Dept Teams" trend="38 Locked" />
+        <StatCard icon="🌐" value={5} label="Active Tracks" trend="All active" accentColor="success" />
       </div>
 
       <div className={styles.mainGrid}>

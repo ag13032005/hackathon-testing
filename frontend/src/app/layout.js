@@ -1,4 +1,5 @@
 import './globals.css';
+import { ToastProvider } from '@/components/ui/Toast';
 
 export const metadata = {
   title: 'EWIT Hackathon 2026 — Earth & Innovation | National Level 24-Hour Hackathon',
@@ -14,7 +15,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="dark" suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        <ToastProvider>
+          {children}
+        </ToastProvider>
+      </body>
     </html>
   );
 }

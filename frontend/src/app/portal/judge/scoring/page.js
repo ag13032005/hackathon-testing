@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import { useToast } from '@/components/ui/Toast';
 
 const DEFAULT_TEAMS = [
   {
@@ -43,6 +44,7 @@ const DEFAULT_TEAMS = [
 ];
 
 export default function JudgeScoringPage() {
+  const toast = useToast();
   const [teams, setTeams] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState('1');
   const [scores, setScores] = useState({
@@ -107,7 +109,7 @@ export default function JudgeScoringPage() {
     localStorage.setItem('ewit_teams_scores', JSON.stringify(updated));
 
     const activeTeamName = teams.find(t => t.id === selectedTeam)?.name;
-    alert(`Evaluation scores submitted successfully for ${activeTeamName}! Average: ${calculateTotal()}/10`);
+    toast.success('Scores Submitted', `Evaluation scores submitted successfully for ${activeTeamName}! Average: ${calculateTotal()}/10`);
   };
 
   return (
