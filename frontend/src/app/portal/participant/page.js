@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import Alert from '@/components/ui/Alert';
+import { useToast } from '@/components/ui/Toast';
 
 export default function ParticipantDashboard() {
+  const toast = useToast();
   const [currentUser, setCurrentUser] = useState(null);
   const [hasProfile, setHasProfile] = useState(false);
   const [team, setTeam] = useState(null); // { name, code, members: [], isLocked: false, isPaid: false }
@@ -15,12 +17,30 @@ export default function ParticipantDashboard() {
   ]);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
+  // Profile Edit States
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [profileForm, setProfileForm] = useState({
+    fullName: '',
+    phone: '',
+    usn: '',
+    branch: '',
+    college: ''
+  });
+
   useEffect(() => {
     const userStr = localStorage.getItem('ewit_current_user');
     if (userStr) {
       const user = JSON.parse(userStr);
       setCurrentUser(user);
       
+      setProfileForm({
+        fullName: user.fullName || '',
+        phone: user.phone || '',
+        usn: user.usn || '',
+        branch: user.branch || '',
+        college: user.college || 'East West Institute of Technology'
+      });
+
       // Look up profile details
       if (user.usn && user.branch) {
         setHasProfile(true);
@@ -33,6 +53,49 @@ export default function ParticipantDashboard() {
       }
     }
   }, []);
+
+  const handleUpdateProfile = (e) => {
+    e.preventDefault();
+    if (!currentUser) return;
+
+    const updatedUser = {
+      ...currentUser,
+      fullName: profileForm.fullName,
+      phone: profileForm.phone,
+      usn: profileForm.usn,
+      branch: profileForm.branch,
+      college: profileForm.college
+    };
+
+    setCurrentUser(updatedUser);
+    localStorage.setItem('ewit_current_user', JSON.stringify(updatedUser));
+
+    // Sync with mock registered users database
+    const registeredUsers = JSON.parse(localStorage.getItem('ewit_mock_users') || '[]');
+    const updatedUsers = registeredUsers.map(u => {
+      if (u.email.toLowerCase() === currentUser.email.toLowerCase()) {
+        return {
+          ...u,
+          fullName: profileForm.fullName,
+          phone: profileForm.phone,
+          usn: profileForm.usn,
+          branch: profileForm.branch,
+          college: profileForm.college
+        };
+      }
+      return u;
+    });
+    localStorage.setItem('ewit_mock_users', JSON.stringify(updatedUsers));
+
+    if (profileForm.usn && profileForm.branch) {
+      setHasProfile(true);
+    } else {
+      setHasProfile(false);
+    }
+
+    setIsEditingProfile(false);
+    toast.success('Profile Updated', 'Your personal information has been saved successfully.');
+  };
 
   const saveTeamState = (updatedTeam) => {
     setTeam(updatedTeam);
@@ -128,7 +191,16 @@ export default function ParticipantDashboard() {
         <Alert
           variant="warning"
           title="Academic Profile Incomplete"
-          description="Please enter your USN and department details in registration or contact the HOD desk to link your profile."
+          description="Please enter your USN and department details to activate your digital event pass."
+          action={
+            <button
+              onClick={() => setIsEditingProfile(true)}
+              className="btn btn-secondary btn-sm"
+              style={{ color: 'var(--warning-800)', borderColor: 'var(--warning-300)' }}
+            >
+              Complete Profile
+            </button>
+          }
         />
       )}
 
@@ -184,6 +256,116 @@ export default function ParticipantDashboard() {
           </div>
         </div>
       )}
+
+      {/* ─── Student Profile Information Card ─── */}
+      <div className={styles.card}>
+        <div className={styles.profileCardHeader}>
+          <div>
+            <h2 className={styles.cardTitle}>Student Profile Settings</h2>
+            <p className={styles.cardSubtitle}>Update your USN, department branch, and personal contact details.</p>
+          </div>
+          <button 
+            onClick={() => setIsEditingProfile(!isEditingProfile)} 
+            className="btn btn-secondary btn-sm"
+          >
+            {isEditingProfile ? 'Cancel' : '⚙️ Edit Profile'}
+          </button>
+        </div>
+
+        {!isEditingProfile ? (
+          <div className={styles.profileDetailsGrid}>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>Full Name</span>
+              <span className={styles.detailValue}>{currentUser.fullName}</span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>USN / Roll Number</span>
+              <span className={styles.detailValue}>{currentUser.usn || <em className={styles.pendingText}>Pending Link</em>}</span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>Branch / Department</span>
+              <span className={styles.detailValue}>{currentUser.branch || <em className={styles.pendingText}>Pending Link</em>}</span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>Phone Number</span>
+              <span className={styles.detailValue}>{currentUser.phone || 'Not Provided'}</span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>College</span>
+              <span className={styles.detailValue}>{currentUser.college}</span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>Email Address</span>
+              <span className={styles.detailValue}>{currentUser.email}</span>
+            </div>
+          </div>
+        ) : (
+          <form onSubmit={handleUpdateProfile} className={styles.form}>
+            <div className={styles.formGrid}>
+              <div className="form-group">
+                <label className="form-label" htmlFor="profileFullName">Full Name</label>
+                <input
+                  type="text"
+                  id="profileFullName"
+                  value={profileForm.fullName}
+                  onChange={(e) => setProfileForm({ ...profileForm, fullName: e.target.value })}
+                  className="form-input"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="profileUsn">USN / Roll Number</label>
+                <input
+                  type="text"
+                  id="profileUsn"
+                  value={profileForm.usn}
+                  onChange={(e) => setProfileForm({ ...profileForm, usn: e.target.value })}
+                  placeholder="1EW22CS001"
+                  className="form-input"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="profileBranch">Branch / Department</label>
+                <input
+                  type="text"
+                  id="profileBranch"
+                  value={profileForm.branch}
+                  onChange={(e) => setProfileForm({ ...profileForm, branch: e.target.value })}
+                  placeholder="Computer Science"
+                  className="form-input"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="profilePhone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="profilePhone"
+                  value={profileForm.phone}
+                  onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
+                  placeholder="9876543210"
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group" style={{ gridColumn: 'span 2' }}>
+                <label className="form-label" htmlFor="profileCollege">College Name</label>
+                <input
+                  type="text"
+                  id="profileCollege"
+                  value={profileForm.college}
+                  onChange={(e) => setProfileForm({ ...profileForm, college: e.target.value })}
+                  className="form-input"
+                  required
+                />
+              </div>
+            </div>
+            <button type="submit" className="btn btn-primary" style={{ alignSelf: 'flex-start', marginTop: '8px' }}>
+              💾 Save Personal Information
+            </button>
+          </form>
+        )}
+      </div>
 
       {/* ─── Team Selection / Setup ─── */}
       {!team ? (
