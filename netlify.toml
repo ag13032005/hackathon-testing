@@ -6,12 +6,8 @@
   # Tell Netlify the Next.js app is in the frontend folder
   base = "frontend"
   
-  # Next.js build output directory
-  publish = ".next"
+  # Next.js static build directory
+  publish = "out"
   
   # Compile command
   command = "npm run build"
-
-[[plugins]]
-  # Install Next.js plugin for routing handling
-  package = "@netlify/plugin-nextjs"
